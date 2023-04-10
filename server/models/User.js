@@ -62,6 +62,10 @@ const userSchema = new Schema({
     type: String,
     default: "",
   },
+  followers: {
+    type: [Schema.Types.ObjectId],
+    default: [],
+  },
   date: {
     type: Date,
     default: Date.now,

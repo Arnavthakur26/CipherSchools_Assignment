@@ -166,4 +166,30 @@ router.put("/updateUser", fetchUser, async (req, res) => {
   );
   res.send(user);
 });
+
+//Route 4: Update Password
+router.put("/updatePassword", fetchUser, async (req, res) => {
+  let success = false;
+  let user = await User.findById(req.user.id).select("-password");
+  if (!user) {
+    return res.status(401).json({ message: "User not found", success });
+  }
+  //generating hash for password
+  const salt = await bcrypt.genSalt(10);
+  const secPass = await bcrypt.hash(req.body.password, salt);
+
+  user = await User.findByIdAndUpdate(
+    req.user.id,
+    { password: secPass },
+    { new: true }
+  );
+  const payload = {
+    user: {
+      id: user.id,
+    },
+  };
+  const authToken = jwt.sign(payload, JWT_SECRET);
+  success = true;
+  res.json({ success, authToken });
+});
 export default router;
