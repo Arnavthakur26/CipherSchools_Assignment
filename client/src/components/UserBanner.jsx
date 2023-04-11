@@ -2,7 +2,7 @@ import React from "react";
 
 const UserBanner = () => {
   return (
-    <div className="pf-user-box ml-[66.2px] min-h-[110px] border-b border-[rgba(10,30,50,.1)]  ">
+    <div className="pf-user-box  ml-[66.2px] min-h-[110px] bg-white sticky top-[59.8px] border-b border-[rgba(10,30,50,.1)]  ">
       <div className="pf-user-back bg-cover bg-[50%] bg-[url(https://www.cipherschools.com/static/media/ProfileCover.e525f2d51356332792cb.png)] flex justify-between flex-[1_1] ">
         <div className="userbox-left bg-gradient-to-r from-white to-transparent pt-4 pl-10 flex gap-[30px]">
           <div>

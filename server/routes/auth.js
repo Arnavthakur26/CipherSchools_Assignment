@@ -8,7 +8,8 @@ import dotenv from "dotenv";
 
 dotenv.config();
 const router = express.Router();
-const JWT_SECRET = process.env.JWT_SECRET;
+// const JWT_SECRET = process.env.JWT_SECRET;
+const JWT_SECRET = "cipherschools";
 
 //ROUTE 1: Register new user at /api/register, No auth required
 router.post(

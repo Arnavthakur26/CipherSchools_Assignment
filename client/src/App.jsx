@@ -10,10 +10,7 @@ const App = () => {
       <Navbar />
       <LeftSidebar />
       <RightSidebar />
-      <UserBanner />
-      <div className="px-[30px] mx-[70px] mt-[30px]">
-        <UserDetails />
-      </div>
+      <UserDetails />
     </div>
   );
 };

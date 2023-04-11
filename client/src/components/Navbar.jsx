@@ -3,7 +3,7 @@ import hamburger from "../assets/hamburger.svg";
 
 const Navbar = () => {
   return (
-    <nav className="flex flex-1 bg-white px-[1em] items-center justify-between border-b-[1px] py-3">
+    <nav className="flex flex-1 sticky top-0 z-[9999] w-full  bg-white px-[1em] items-center justify-between border-b-[1px] py-3">
       <div className="flex left-nav">
         <img src={hamburger} alt="" />
         <div className="flex mx-8 items-center gap-2">

@@ -5,7 +5,7 @@ import { useState } from "react";
 const RightSidebar = () => {
   const [active, setactive] = useState("Profile");
   return (
-    <div className="flex flex-col bg-white text-[#2c3d4f] pt-[0.8rem] fixed mt-[120px] right-0 justify-between shadow-lg h-[calc(100vh-59.8px)] font-sans border-l w-[67px] text-[9px] leading-[1.25]">
+    <div className="flex flex-col bg-white text-[#2c3d4f] pt-[0.8rem] fixed mt-[120px] right-0 justify-between h-[calc(100vh-59.8px)] font-sans border-l w-[67px] text-[9px] leading-[1.25]">
       <div className="absolute ml-[-29px] cursor-pointer top-0 w-[30px] h-[40px] bg-white flex justify-center items-center rounded-l-md border-b">
         <svg
           width="12"

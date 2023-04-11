@@ -4,7 +4,7 @@ import { logout } from "../assets";
 
 const LeftSidebar = () => {
   return (
-    <div className="flex flex-col bg-white text-[#2c3d4f] pt-[0.8rem] fixed justify-between shadow-lg h-[calc(100vh-59.8px)] font-sans border-r w-[67px] text-[9px] leading-[1.25]">
+    <div className="flex flex-col  bg-white text-[#2c3d4f] pt-[0.8rem] z-[9999] fixed overflow-hidden justify-between shadow-lg h-[calc(100vh-59.8px)] font-sans border-r w-[67px] text-[9px] leading-[1.25]">
       <div className="flex flex-col justify-between">
         {SidebarLinks.map((item) => {
           return (
