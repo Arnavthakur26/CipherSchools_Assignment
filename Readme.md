@@ -43,3 +43,6 @@ This is a project to replicate the CipherSchools Profile page. The project uses 
 ## Reference Images
 
 Please see the attached reference images for design inspiration. Additional UIs can be found by logging into a CipherSchools account and visiting the profile page.
+![Screenshot](Cipher-Schools-Profile-Page.png)
+![Screenshot](Cipher-Schools-Profile-Page1.png)
+![Screenshot](Cipher-Schools-Profile-Page2.png)
