@@ -6,7 +6,8 @@ import auth from "./routes/auth.js";
 
 dotenv.config();
 // const mongoURI = process.env.MONGO_URI;
-const mongoURI = "mongodb://127.0.0.1:27017/cipher_schools";
+const mongoURI =
+  "mongodb+srv://tarnav206:rl7GmYFYPZPsFPyL@cluster0.mqv6mko.mongodb.net/?retryWrites=true&w=majority";
 connectToMongo(mongoURI);
 const app = express();
 
