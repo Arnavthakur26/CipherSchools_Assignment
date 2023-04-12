@@ -7,14 +7,14 @@ import auth from "./routes/auth.js";
 dotenv.config();
 // const mongoURI = process.env.MONGO_URI;
 const mongoURI =
-  "mongodb+srv://tarnav206:rl7GmYFYPZPsFPyL@cluster0.mqv6mko.mongodb.net/?retryWrites=true&w=majority";
+  "mongodb+srv://tarnav206:rl7GmYFYPZPsFPyL@cluster0.4st1mvn.mongodb.net/?retryWrites=true&w=majority/cipherschools";
 connectToMongo(mongoURI);
 const app = express();
 
 app.use(cors());
 app.use(express.json());
 
-const port = 3000;
+const port = 5000;
 
 app.get("/", (req, res) => {
   res.send("Hello World!");

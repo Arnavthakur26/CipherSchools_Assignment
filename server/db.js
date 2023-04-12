@@ -1,8 +1,8 @@
 import mongoose from "mongoose";
 
-async function connectToMongo(mongoURI) {
-  await mongoose
-    .connect(mongoURI, { useNewUrlParser: true })
+function connectToMongo(mongoURI) {
+  mongoose
+    .connect(mongoURI)
     .then(() => {
       console.log("Connected to mongoDB");
     })
