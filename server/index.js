@@ -7,7 +7,7 @@ import auth from "./routes/auth.js";
 dotenv.config();
 // const mongoURI = process.env.MONGO_URI;
 const mongoURI =
-  "mongodb+srv://tarnav206:rl7GmYFYPZPsFPyL@cluster0.4st1mvn.mongodb.net/?retryWrites=true&w=majority/cipherschools";
+  "mongodb+srv://tarnav206:rl7GmYFYPZPsFPyL@cluster0.4st1mvn.mongodb.net/?retryWrites=true&w=majority";
 connectToMongo(mongoURI);
 const app = express();
 

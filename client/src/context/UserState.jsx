@@ -5,7 +5,7 @@ const UserState = (props) => {
   const [user, setUser] = useState({});
   const getUser = async (authToken) => {
     const response = await fetch(
-      `https://cipher-schools.onrender.com//api/auth/getUser`,
+      `https://cipher-schools.onrender.com/api/auth/getUser`,
       {
         method: "POST",
         headers: {
@@ -18,7 +18,7 @@ const UserState = (props) => {
   };
   const updateUser = async (user, authToken) => {
     const response = await fetch(
-      "https://cipher-schools.onrender.com//api/auth/updateUser",
+      "https://cipher-schools.onrender.com/api/auth/updateUser",
       {
         method: "PUT",
         headers: {
