@@ -1,41 +1,73 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import CalendarHeatmap from "react-calendar-heatmap";
 import "react-calendar-heatmap/dist/styles.css";
 import "../styles/heatmap.css";
 import Weblinks from "../constants/Weblinks";
-import { loginUser } from "../utils/userDetails";
+import userContext from "../context/UserContext";
 import UserBanner from "./UserBanner";
 import LoginModal from "./LoginModal";
 
 const UserDetails = () => {
-  const [authToken, setauthToken] = useState(null);
+  const [authToken, setauthToken] = useState("");
+  const [editField, seteditField] = useState({
+    description: false,
+    weblinks: false,
+    proffesionalDetails: false,
+    password: false,
+    interests: false,
+  });
   const [showModal, setShowModal] = useState(false);
+  const uContext = useContext(userContext);
+  const { user, setUser, getUser, updateUser } = uContext;
+  useEffect(() => {
+    setauthToken(localStorage.getItem("authToken"));
+    getUser(authToken);
+  }, [authToken]);
   if (authToken) {
     return (
       <>
-        <UserBanner />
-        <div className="px-[30px] mx-[70px] mt-[30px]">
-          <div className="about-me flex flex-col gap-4 ">
+        <UserBanner
+          firstname={user.firstname}
+          lastname={user.lastname}
+          email={user.email}
+        />
+        <div className="lg:px-[30px] lg:mx-[70px] px-[10px] mt-[30px]">
+          <div className="about-me flex flex-col gap-4 overflow-y-hidden">
             <div className="flex justify-between">
-              <div className="font-opensans text-[#2c3d4f] font-bold">
+              <div className="font-opensans text-[#2c3d4f] font-bold lg:text-[16px] text-[14px]">
                 ABOUT ME
               </div>
-              <button className="px-7 py-1 bg-button text-white rounded-md text-[13px]">
-                Edit
+              <button
+                className="px-7 py-1 bg-button text-white rounded-md text-[13px]"
+                onClick={() => {
+                  seteditField({
+                    ...editField,
+                    description: !editField.description,
+                  });
+                  updateUser(user, authToken);
+                }}
+              >
+                {editField.description ? "Save" : "Edit"}
               </button>
             </div>
             <div className="flex bg-white rounded-lg  p-3">
               <textarea
-                name=""
+                name="description"
                 id=""
                 rows="4"
+                value={user.description}
+                onChange={(e) => {
+                  setUser({ ...user, description: e.target.value });
+                }}
+                maxLength={2000}
+                disabled={editField.description ? false : true}
                 placeholder="Add something about you"
-                className="text-[14px] w-full h-[100px] flex resize-none overflow-x-hidden overflow-y-auto rounded-md focus:outline-none placeholder:font-bold"
+                className="lg:text-[16px] text-[14px] overflow-hidden  disabled:bg-white w-full h-[100px] flex resize-none overflow-x-hidden  rounded-md focus:outline-none placeholder:font-bold"
               ></textarea>
             </div>
           </div>
-          <hr className="w-full  h-[1px] mt-[26px] mb-[16px]" />
-          <div className="user-heatmap text-white fill-white">
+          <hr className="w-full h-[1px] mt-[26px] mb-[16px]" />
+          <div className="user-heatmap text-white fill-white lg:text-[16px] text-[14px]">
             <div className="font-opensans text-[#2c3d4f] font-bold">
               CIPHER MAP
             </div>
@@ -86,11 +118,20 @@ const UserDetails = () => {
               <div className="font-opensans text-[#2c3d4f] font-bold">
                 ON THE WEB
               </div>
-              <button className="px-7 py-1 bg-button text-white rounded-md text-[13px]">
-                Edit
+              <button
+                onClick={() => {
+                  seteditField({
+                    ...editField,
+                    weblinks: !editField.weblinks,
+                  });
+                  updateUser(user, authToken);
+                }}
+                className="px-7 py-1 bg-button text-white rounded-md text-[13px]"
+              >
+                {editField.weblinks ? "Save" : "Edit"}
               </button>
             </div>
-            <div className="grid grid-cols-3  gap-[10px_30px] ">
+            <div className="grid lg:grid-cols-2 grid-cols-1  gap-[10px_30px] ">
               {Weblinks.map((item) => {
                 return (
                   <div className="text-[#2c3d4f] font-medium">
@@ -101,10 +142,20 @@ const UserDetails = () => {
                       </span>
                       <input
                         type="url"
-                        name=""
-                        id=""
+                        name={item.address}
+                        value={user.weblinks ? user.weblinks[item.address] : ""}
+                        onChange={(e) => {
+                          setUser({
+                            ...user,
+                            weblinks: {
+                              ...user.weblinks,
+                              [e.target.name]: e.target.value,
+                            },
+                          });
+                        }}
+                        disabled={editField.weblinks ? false : true}
                         placeholder={item.name}
-                        className="placeholder:font-light focus:outline-none"
+                        className="placeholder:font-light w-full disabled:bg-white focus:outline-none lg:text-[16px] text-[14px]"
                       />
                     </div>
                   </div>
@@ -114,18 +165,18 @@ const UserDetails = () => {
           </div>
           <hr className="w-full h-[1px] mt-[26px] mb-[16px]" />
           <div className="user-proffesional-details">
-            <div className="flex justify-between">
-              <div className="font-opensans text-[#2c3d4f] font-bold">
+            <div className="flex  justify-between">
+              <div className="font-opensans text-[#2c3d4f] font-bold lg:text-[16px] text-[14px]">
                 PROFFESIONAL DETAILS
               </div>
               <button className="px-7 py-1 bg-button text-white rounded-md text-[13px]">
                 Edit
               </button>
             </div>
-            <div className="grid grid-cols-2 gap-[30px] font-medium text-[#2c3d4f]">
-              <div className="flex flex-col ">
+            <div className="grid lg:grid-cols-2 grid-cols-1 gap-[30px] font-medium text-[#2c3d4f]">
+              <div className="flex flex-col lg:text-[16px] text-[14px] ">
                 <div>Highest Education</div>
-                <div className="bg-white mt-1 flex items-center justify-between p-[8px_16px] rounded-lg">
+                <div className="bg-white mt-1 flex items-center justify-between p-[8px_16px] lg:text-[16px] text-[14px] rounded-lg">
                   <span>Primary</span>
                   <span className="bg-white">
                     <img
@@ -135,7 +186,7 @@ const UserDetails = () => {
                   </span>
                 </div>
               </div>
-              <div className="flex flex-col ">
+              <div className="flex flex-col lg:text-[16px] text-[14px] ">
                 <div>What do you do currently?</div>
                 <div className="bg-white mt-1 flex items-center justify-between p-[8px_16px] rounded-lg">
                   <span>College Student</span>
@@ -149,8 +200,8 @@ const UserDetails = () => {
               </div>
             </div>
           </div>
-          <hr className="w-full h-[1px] mt-[26px] mb-[16px]" />
-          <div className="change-password">
+          <hr className="w-full h-[1px] mt-[26px] mb-[16px] " />
+          <div className="change-password lg:text-[16px] text-[14px]">
             <div className="flex justify-between">
               <div className="font-opensans text-[#2c3d4f] font-bold">
                 PASSWORD & SECURITY
@@ -169,6 +220,7 @@ const UserDetails = () => {
                         type="password"
                         name=""
                         id=""
+                        disabled={editField.password ? false : true}
                         value={"..................."}
                         className="focus:outline-none"
                       />
@@ -181,7 +233,7 @@ const UserDetails = () => {
           <hr className="w-full h-[1px] mt-[26px] mb-[16px]" />
           <div className="user-interests mb-16">
             <div className="flex justify-between">
-              <div className="font-opensans text-[#2c3d4f] font-bold">
+              <div className="font-opensans text-[#2c3d4f] font-bold lg:text-[16px] text-[14px]">
                 INTERESTS
               </div>
               <button className="px-7 py-1 bg-button text-white rounded-md text-[13px]">
@@ -203,57 +255,7 @@ const UserDetails = () => {
       >
         Login
       </div>
-      {showModal ? (
-        <>
-          <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
-            <div className="relative w-auto my-6 mx-auto max-w-3xl">
-              {/*content*/}
-              <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
-                {/*header*/}
-                <div className="flex items-start justify-between p-5 border-b border-solid border-slate-200 rounded-t">
-                  <h3 className="text-3xl font-semibold">Modal Title</h3>
-                  <button
-                    className="p-1 ml-auto bg-transparent border-0 text-black opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
-                    onClick={() => setShowModal(false)}
-                  >
-                    <span className="bg-transparent text-black opacity-5 h-6 w-6 text-2xl block outline-none focus:outline-none">
-                      ×
-                    </span>
-                  </button>
-                </div>
-                {/*body*/}
-                <div className="relative p-6 flex-auto">
-                  <p className="my-4 text-slate-500 text-lg leading-relaxed">
-                    I always felt like I could do anything. That’s the main
-                    thing people are controlled by! Thoughts- their perception
-                    of themselves! They're slowed down by their perception of
-                    themselves. If you're taught you can’t do anything, you
-                    won’t do anything. I was taught I could do everything.
-                  </p>
-                </div>
-                {/*footer*/}
-                <div className="flex items-center justify-end p-6 border-t border-solid border-slate-200 rounded-b">
-                  <button
-                    className="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                    type="button"
-                    onClick={() => setShowModal(false)}
-                  >
-                    Close
-                  </button>
-                  <button
-                    className="bg-button text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                    type="button"
-                    onClick={() => setShowModal(false)}
-                  >
-                    Login
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
-        </>
-      ) : null}
+      {showModal ? <LoginModal open={showModal} /> : null}
     </div>
   );
 };

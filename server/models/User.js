@@ -17,8 +17,9 @@ const userSchema = new Schema({
     lowercase: true,
     match: [/.+@.+\..+/, "Please enter a valid email address"],
   },
-  descpription: {
+  description: {
     type: String,
+    default: "",
   },
   weblinks: {
     linkedIn: {

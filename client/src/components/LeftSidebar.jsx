@@ -4,7 +4,7 @@ import { logout } from "../assets";
 
 const LeftSidebar = () => {
   return (
-    <div className="flex flex-col  bg-white text-[#2c3d4f] pt-[0.8rem] z-[9999] fixed overflow-hidden justify-between shadow-lg h-[calc(100vh-59.8px)] font-sans border-r w-[67px] text-[9px] leading-[1.25]">
+    <div className="hidden flex-col lg:flex  bg-white text-[#2c3d4f] pt-[0.8rem] z-[9999] fixed overflow-hidden justify-between shadow-lg h-[calc(100vh-59.8px)] font-sans border-r w-[67px] text-[9px] leading-[1.25]">
       <div className="flex flex-col justify-between">
         {SidebarLinks.map((item) => {
           return (
@@ -24,7 +24,13 @@ const LeftSidebar = () => {
       </div>
       <div className="mx-[3px ">
         <hr className="bg-[#2c3d4f] w-full mb-1 h-[1px]" />
-        <div className="flex text-[#2c3d4f] flex-col mb-2 cursor-pointer text-center justify-center py-[5px] hover:bg-sidebarTabHover transition-colors rounded-md gap-[0.2rem] items-center mx-[2px]">
+        <div
+          onClick={() => {
+            localStorage.removeItem("authToken");
+            window.location.reload();
+          }}
+          className="flex text-[#2c3d4f] flex-col mb-2 cursor-pointer text-center justify-center py-[5px] hover:bg-sidebarTabHover transition-colors rounded-md gap-[0.2rem] items-center mx-[2px]"
+        >
           <img
             src={logout}
             alt="logout"

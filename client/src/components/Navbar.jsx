@@ -4,25 +4,23 @@ import hamburger from "../assets/hamburger.svg";
 const Navbar = () => {
   return (
     <nav className="flex flex-1 sticky top-0 z-[9999] w-full  bg-white px-[1em] items-center justify-between border-b-[1px] py-3">
-      <div className="flex left-nav">
-        <img src={hamburger} alt="" />
-        <div className="flex mx-8 items-center gap-2">
+      <div className="flex left-nav gap-1">
+        <img src={hamburger} alt="" className="lg:block hidden" />
+        <div className="flex lg:mx-8 items-center lg:gap-2">
           <img
-            className="w-[35px] h-[35px]"
+            className="lg:w-[35px] lg:h-[35px] w-[30px] h-[30px]"
             src="https://www.cipherschools.com/static/media/Cipherschools_icon@2x.3b571d743ffedc84d039.png"
             alt=""
           />
-          <h1 className="text-[20px] font-sans font-bold text-[#222831]">
+          <h1 className="lg:text-[20px] text-[16px] font-sans font-bold text-[#222831]">
             CipherSchools
           </h1>
         </div>
-        <div className="flex items-center gap-1">
+        <div className="flex items-center gap-1 lg:text-[16px] text-[12px]">
           <svg
-            width="18"
-            height="18"
             viewBox="0 0 27 27"
             fill="none"
-            className="browse-icon"
+            className="browse-icon lg:w-[18px] lg:h-[18px] w-[15px] h-[15px]"
             xmlns="http://www.w3.org/2000/svg"
           >
             <path
@@ -59,7 +57,7 @@ const Navbar = () => {
         </div>
       </div>
       <div className="flex right-nav items-center gap-6">
-        <div className="flex items-center bg-searchbox rounded-2xl mr-[10px] px-[15px] h-[35px]  ">
+        <div className="lg:flex hidden items-center bg-searchbox rounded-2xl mr-[10px] px-[15px] h-[35px]  ">
           <svg
             width="17"
             viewBox="0 0 28 28"
@@ -98,7 +96,7 @@ const Navbar = () => {
             ></path>
           </svg>
         </div>
-        <div className="flex">
+        <div className="flex ">
           <svg
             width="15"
             height="19"
@@ -114,13 +112,13 @@ const Navbar = () => {
             ></path>
           </svg>
           <span
-            className="bg-button flex items-center justify-center text-white leading-3
-           rounded-[3px] px-[3px] py-[4px] text-[12px] relative top-[-8px]"
+            className="bg-button lg:flex hidden items-center justify-center text-white leading-3
+           rounded-[3px] lg:px-[3px] py-[4px] text-[12px] relative top-[-8px]"
           >
             0
           </span>
         </div>
-        <div className="rounded-full bg-button flex items-center justify-center w-[22px] h-[22px] ">
+        <div className="rounded-full bg-button hidden lg:flex items-center justify-center w-[22px] h-[22px] ">
           <svg
             width="16"
             height="16"
@@ -134,7 +132,7 @@ const Navbar = () => {
           </svg>
         </div>
         <div
-          className="watch-points-cont flex  align-middle"
+          className="watch-points-cont lg:flex hidden  align-middle"
           id="nav-cipher-points"
         >
           <div
